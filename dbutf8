@@ -50,7 +50,7 @@ function generateScript($DBNAME, $collationName, $outFile)
         } else {
             $val = preg_replace('@^.*?(DROP\s+(PROCEDURE|FUNCTION)\s+IF\s+EXISTS\s+`[^`]+`).*?$@is', '$1;', $val);
             $val = preg_replace('/DEFINER=`[^`]+`@`[^`]+`/is', '', $val);
-            $val = preg_replace('@COLLATE\s+[^ ]+@is', '', $val);
+            $val = preg_replace('@COLLATE\s+[a-z0-9_]+@is', '', $val);
         }
     });
     $sql = $sql . "\n\n\n" . join("\n", $output);
