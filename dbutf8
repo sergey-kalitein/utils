@@ -42,7 +42,7 @@ function generateScript($DBNAME, $collationName, $outFile)
     $sql = $sql . "SET AUTOCOMMIT = 1; SET FOREIGN_KEY_CHECKS = 1; SET UNIQUE_CHECKS = 1;\n";
 
     $output = array();
-    exec("mysqldump --no-create-db --no-create-info --no-data --routines --triggers=0 $DBNAME", $output);
+    exec("mysqldump -uroot -p --no-create-db --no-create-info --no-data --routines --triggers=0 $DBNAME", $output);
     array_walk($output, function(& $val) {
         //            
         if (false !== stripos($val, 'ALTER DATABASE')) {
