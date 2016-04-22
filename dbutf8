@@ -1,6 +1,9 @@
 #!/usr/bin/php
 <?php
-
+/**
+ * DB UTF-8 Fixer
+ * 
+ */
 $DBNAME = null;
 $outFile = 'output.sql';
 $collationName = 'utf8_general_ci';
