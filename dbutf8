@@ -2,7 +2,7 @@
 <?php
 /**
  * DB UTF-8 Fixer
- * 
+ * (C) Hello World
  */
 $DBNAME = null;
 $outFile = 'output.sql';
