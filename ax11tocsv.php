@@ -4,6 +4,7 @@
 ini_set('memory_limit', '2G');
 
 $nameInputFile = __DIR__ . "/WRCS.xml";
+//$nameInputFile = 'http://www.dfi.globalcarexchange.com/WRCS.xml';
 echo 'Loading the input source data from: ' . $nameInputFile . ' ...';
 $xml = simplexml_load_file($nameInputFile, 'SimpleXMLElement', LIBXML_PARSEHUGE | LIBXML_NOBLANKS);
 $json = json_decode(json_encode($xml), JSON_OBJECT_AS_ARRAY);
@@ -59,6 +60,12 @@ foreach ($vehiclesDetailsArray as $_v) {
     if (strlen($_v['Vin']) !== 17) {
         echo "\n\033[0;31m[warning] skipping bad VIN: {$_v['Vin']}\e[0m\n";
         continue;
+    }
+
+    // fixing company names
+    if (strlen(trim($_v['CompanyName'])) === 0) {
+        echo "\n\033[0;31m[warning] empty Company Name for VIN: {$_v['Vin']}\e[0m\n";
+        $_v['CompanyName'] = 'Untitled Company Name';
     }
 
     $lengthRecord = count($_v);
